@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    .body p {
+      border: 1px solid black;
+      border-style: groove;
+      width: 600px;
+      margin-left: 10%;
+      border-radius: 10px;
+      font-weight: bold;
+      font-family: Arial, Helvetica, sans-serif;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .body button {
+      display: inline-block;
+      vertical-align: middle;
+      margin-bottom: 15px;
+    }
+
+    .question {
+      font-size: 20px;
+    }
+
+    .vote {
+      background: none;
+      border-radius: 3px;
+      background-color: rgb(83, 82, 172);
+      color: white;
+    }
+
+    .list-group {
+      width: 300px;
+      margin-left: 30%;
+    }
+
+    .formvote {
+      margin-left: 30%;
+      border: 1px solid black;
+      width: 500px;
+    }
+  .form-check {
+    border: 1px solid rgb(131, 127, 127);
+  }
+    .opone {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .formgrouptwo{
+      border: 1px solid rgb(100, 98, 98);
+      
+      width: 300px;
+    }
+    .formgrouptwo span{
+      margin-left: 30px;
+    }
+    .formgrouptwo h5{
+      border: 1px solid rgb(100, 98, 98);
+    }
+  </style>
+</head>
+
+<body>
+  {% load widget_tweaks %}
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#" style="font-weight: bold;">Poll Project</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <form method="POST" class="formvote">
+    {% csrf_token %}
+    <div class="form-check">
+      <label for="" class="form-checklabel" style="margin-left: -21px; font-weight: bolder; font-family: Arial, Helvetica, sans-serif; border: 1px solid rgb(131, 127, 127); width: 500px; height: auto;">{{poll.question}}</label>
+      <br>
+      <br>
+      <input class="form-check-input" type="radio" name="choice" value="option1" id="defaultCheck1">
+      <label class="form-check-label" for="defaultCheck1">
+        {{poll.option_one}}
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="choice" value="option2" id="defaultCheck2">
+      <label class="form-check-label" for="defaultCheck2">
+        {{poll.option_two}}
+      </label>
+    </div>
+    <div class="form-check">
+      
+      <input class="form-check-input" type="radio" name="choice" value="option3" id="defaultCheck2">
+      <label class="form-check-label" for="defaultCheck2">
+        {{poll.option_three}}
+        
+      </label>
+    </div>
+    <div class="form-check">
+      
+      <input class="form-check-input" type="radio" name="choice" value="option4" id="defaultCheck2">
+      <label class="form-check-label" for="defaultCheck2">
+        {{poll.option_four}}
+      </label>
+    </div>
+    <br>
+    {% if user.is_authenticated %}
+    <input type="submit" id="btn" class="btn btn-secondary">
+    {% else %}
+    <p>Please login first</p>
+    {% endif %}
+  </form>
+  <p id="checking" style="display:none;">{{poll.users}}</p>
+  <p id="currentuser" style="display: none;">{{user.id}}</p>
+  <center>
+    <p id="alreadyvoted"></p>
+  </center>
+  <br>
+  <br>
+  <center>
+    <h2 style="font-family: Arial, Helvetica, sans-serif; font-weight: bold;">Results of this poll</h2>
+    <div class="formgrouptwo">
+      <h3>{{poll.question}} <span class="badge badge-secondary">New</span></h3><br>
+      <h5>{{poll.option_one}} <span class="badge badge-secondary">{{poll.option_one_count}} votes</span></h5><br>
+      <h5>{{poll.option_two}} <span class="badge badge-secondary">{{poll.option_two_count}} votes</span></h5><br>
+      <h5>{{poll.option_three}} <span class="badge badge-secondary">{{poll.option_three_count}} votes</span></h5><br>
+      <h5>{{poll.option_four}} <span class="badge badge-secondary">{{poll.option_four_count}} votes</span></h5><br>
+      <h3 style="background-color: rgb(160, 153, 153);">Total Votes <span class="badge badge-secondary">{{poll.total}} votes</span></h3>
+    </div>
+  </center>
+  <br>
+  <script>
+    var a = document.getElementById('checking').innerHTML
+    var b = document.getElementById('currentuser').innerHTML
+    console.log(a)
+    console.log(b)
+    if(a.includes(b)){
+      document.getElementById('btn').style.display="none"
+      document.getElementById('alreadyvoted').innerHTML="You have voted"
+    }
+  </script>
+</body>
+
+</html>
