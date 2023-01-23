@@ -88,7 +88,10 @@
         var hrs = date.getHours()
         var mns=date.getMinutes()
         var scs = date.getSeconds()
-        var time = hrs+":"+mns
+        var hours=hrs
+        var minutes=parseInt(mns)-1
+        var time = hours+":"+minutes.toString()
+        console.log(time)
         var deletethis = document.querySelectorAll('a')
         window.onload=funcfunc()
         function funcfunc(){
