@@ -89,14 +89,14 @@
         var mns=date.getMinutes()
         var scs = date.getSeconds()
         var hours=hrs
-        var minutes=parseInt(mns)-1
-        var time = hours+":"+minutes.toString()
+        var time = hours+":"+mns
         console.log(time)
         var deletethis = document.querySelectorAll('a')
         window.onload=funcfunc()
         function funcfunc(){
           for(var i=0;i<deletethis.length;i++){
             if(deletethis[i].innerHTML==time){
+              console.log(deletethis[i].innerHTML)
               deletethis[i].click()
             }
         }
