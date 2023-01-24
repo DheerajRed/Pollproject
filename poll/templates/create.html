@@ -82,7 +82,7 @@
         <div class="form-group">
           {% csrf_token %} 
           <label for="" style="display: none;">Default time,don't change this</label>
-        {% render_field form.time class="form-control" value="" id="timefield" style="display:none;"   %}
+        {% render_field form.time class="form-control" value="" id="timefield"   %}
         </div>
         <div class="form-group">
           {% csrf_token %} 
@@ -124,11 +124,10 @@
         var hours = date.getHours()
         var minutes = date.getMinutes()
         var seconds = date.getSeconds()
-        var time=hours+":"+minutes
-        
-       
+        var mns=parseInt(minutes)-1
+        var timetwo=hours+":"+mns.toString()
         document.getElementById('check').addEventListener('click',function(e){
-          document.getElementById('timefield').value=time
+          document.getElementById('timefield').value=timetwo
           if(document.getElementById('check').checked==true){
             document.getElementById('sub').disabled=false
           }
